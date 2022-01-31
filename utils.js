@@ -22,13 +22,13 @@ let updateStore = (data) => {
     fs.writeFileSync("./data.json", JSON.stringify(data))
 }
 
-let viewAll = ()=>{
+let viewAll = () => {
     return getDataFromStore();
 }
 
 let viewTask = (title) => {
     let data = getDataFromStore();
-    let matchedObj = data.filter((ele)=>{
+    let matchedObj = data.filter((ele) => {
         return ele.title === title
     })
     return matchedObj[0]
@@ -37,26 +37,28 @@ let viewTask = (title) => {
 let deleteTask = (title) => {
     let data = getDataFromStore();
 
-    let foundAt = data.findIndex((ele)=>{
+    let foundAt = data.findIndex((ele) => {
         return ele.title === title
     })
-    if(foundAt<0) return false
+    if (foundAt < 0) return false
     data.splice(foundAt, 1)
     updateStore(data)
     return true
 }
 
-let addTask = (title, desc="No Desc.") =>{
+let addTask = (title, desc = "No Desc.") => {
     let fileData = getDataFromStore();
-    let found = fileData.find((ele)=>{
-       return ele.title === title
+    let found = fileData.find((ele) => {
+        return ele.title === title
     })
 
-    if(found) return false;
+    if (found) return false;
+    d = new Date()
+
     fileData.push({
         title,
         desc,
-        date: Date.now().toLocaleString()
+        date: d.toLocaleString()
     })
     updateStore(fileData)
     return true
