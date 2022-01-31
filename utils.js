@@ -15,7 +15,6 @@ let generateBuiderMetadata = (type, desc = "", required = false) => {
         type: type,
         describe: desc,
         demandOption: required
-
     }
 }
 
@@ -30,28 +29,37 @@ let viewAll = ()=>{
 let viewTask = (title) => {
     let data = getDataFromStore();
     let matchedObj = data.filter((ele)=>{
-        return ele.title == title
+        return ele.title === title
     })
     return matchedObj[0]
 }
 
 let deleteTask = (title) => {
     let data = getDataFromStore();
-    let updatedData = data.filter((ele)=>{
-        return ele.title !== title
+
+    let foundAt = data.findIndex((ele)=>{
+        return ele.title === title
     })
-    updateStore(updatedData)
+    if(foundAt<0) return false
+    data.splice(foundAt, 1)
+    updateStore(data)
+    return true
 }
 
 let addTask = (title, desc="No Desc.") =>{
     let fileData = getDataFromStore();
-    console.log(fileData);
+    let found = fileData.find((ele)=>{
+       return ele.title === title
+    })
+
+    if(found) return false;
     fileData.push({
         title,
         desc,
         date: Date.now().toLocaleString()
     })
     updateStore(fileData)
+    return true
 }
 
 module.exports = {

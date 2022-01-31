@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "This is simple cli to add tasks",
   "main": "app.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Parag Bharadva",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^5.0.0",
+    "chalk": "^4.1.0",
     "yargs": "^17.3.1"
   }
 }
